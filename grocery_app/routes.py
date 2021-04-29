@@ -140,7 +140,7 @@ def add_to_shopping_list(item_id):
 @main.route('/shopping_list')
 @login_required
 def shopping_list():
-    return render_template('shopping_cart.html', current_user=current_user)
+    return render_template('shopping_list.html', current_user=current_user)
 
 
 # Authentication
