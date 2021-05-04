@@ -131,16 +131,17 @@ def item_detail(item_id):
 @main.route('/add_to_shopping_list/<item_id>', methods=['POST'])
 @login_required
 def add_to_shopping_list(item_id):
-    item = db.session.query(GroceryItem).get(item_id)
-    if item != None:
-        current_user.shopping_list_items.append(item)
-        db.session.commit()
-    return redirect(url_for('main.shopping_list'))
+    item = GroceryItem.query.get(item_id)
+
+    current_user.shopping_list_items.append(item)
 
 @main.route('/shopping_list')
 @login_required
 def shopping_list():
-    return render_template('shopping_list.html', current_user=current_user)
+   shopping_list = current_user.shopping_list_items
+
+   return render_template('shopping_list.html', shopping_list=shopping_list)
+
 
 
 # Authentication
